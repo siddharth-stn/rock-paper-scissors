@@ -23,7 +23,7 @@ function playIt (computerSelection, playerSelection) {
     let result;
     if (playerSelection == 4) {
         result = "Wrong Entry by the Human Player";
-        console.log(result);
+        return result;
     } else {
         switch (true) {
             case computerSelection == playerSelection:
@@ -36,13 +36,13 @@ function playIt (computerSelection, playerSelection) {
                 result = "You Lost this time! Scissors can't cut through a Rock. Computer chose Rock.";
                 break;
             case computerSelection == "Paper" && playerSelection == "Rock":
-                result = "You Lost this time! Paper is thin but is covers a Rock. Computer chose Paper.";
+                result = "You Lost this time! Paper is thin but it covers a Rock. Computer chose Paper.";
                 break;
             case computerSelection == "Paper" && playerSelection == "Scissors":
                 result = "You Win! Your Scissors chewed through the Computer's Paper. Computer chose Paper.";
                 break;
             case computerSelection == "Scissors" && playerSelection == "Rock":
-                result = "You Win! Computer's Scissors can't through your Rock. Computer chose Scissors.";
+                result = "You Win! Computer's Scissors can't cut through your Rock. Computer chose Scissors.";
                 break;
             case computerSelection == "Scissors" && playerSelection == "Paper":
                 result = "You Lost this time! Computer's Scissors chewed your Paper. Computer chose Scissors.";
@@ -50,39 +50,49 @@ function playIt (computerSelection, playerSelection) {
             default:
                 break;
         }
-    console.log(result);
+    return result;
     }
 }
 
-function startPlay (computerSelection, playerSelection) {
+function startPlay (computerSelection) {
+        let playerSelection = Number(prompt(
+            `To play, Enter your selection, then press Enter or Ok: 
+            \n Press 1 for Rock, 
+            \n Press 2 for Paper, 
+            \n Press 3 for Scissor 
+            \n any other selection will end play`
+            )); 
+        
+            if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
+                switch (true) {
+                    case playerSelection == 1:
+                        playerSelection = "Rock"
+                        break;
+                    case playerSelection == 2:
+                        playerSelection = "Paper"
+                        break;
+                    case playerSelection == 3:
+                        playerSelection = "Scissors"
+                        break;
+                    default:
+                        break;
+                }
+            } else {playerSelection = 4}
 
-    //************ When this game will be played through the browser then this code might help ******************
-    // let playerSelection = Number(prompt(
-    //     `To play, Enter your selection, then press Enter or Ok: 
-    //     \n Press 1 for Rock, 
-    //     \n Press 2 for Paper, 
-    //     \n Press 3 for Scissor 
-    //     \n any other selection will end play`
-    //     )); 
-    //*************************************************************************************************************
-    playerSelection = Number(playerSelection);
-    if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
-        switch (true) {
-            case playerSelection == 1:
-                playerSelection = "Rock"
-                break;
-            case playerSelection == 2:
-                playerSelection = "Paper"
-                break;
-            case playerSelection == 3:
-                playerSelection = "Scissors"
-                break;
-            default:
-                break;
-        }
-    } else {playerSelection = 4}
+        let result = playIt(computerSelection, playerSelection); 
+        return result;    
+    }
 
-    playIt(computerSelection, playerSelection);
+
+try {
+    let counter = 0;
+    while (counter < 5) { 
+       console.log(startPlay(computerPlay()));
+       counter += 1;  
+    }
+} catch (error) {
+    error = "Wrong Entry by Human Player";
+    console.log(error);
 }
 
 
