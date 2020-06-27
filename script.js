@@ -1,5 +1,8 @@
 "use strict";
 
+const prompt = require('prompt-sync')();
+
+
 function computerPlay () {
     let comp_choice;
     let rand_num = Math.round(Math.random() * 2 + 1);
@@ -55,39 +58,43 @@ function playIt (computerSelection, playerSelection) {
 }
 
 function startPlay (computerSelection) {
-        let playerSelection = Number(prompt(
-            `To play, Enter your selection, then press Enter or Ok: 
-            \n Press 1 for Rock, 
-            \n Press 2 for Paper, 
-            \n Press 3 for Scissor 
-            \n any other selection will end play`
-            )); 
-        
-            if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
-                switch (true) {
-                    case playerSelection == 1:
-                        playerSelection = "Rock"
-                        break;
-                    case playerSelection == 2:
-                        playerSelection = "Paper"
-                        break;
-                    case playerSelection == 3:
-                        playerSelection = "Scissors"
-                        break;
-                    default:
-                        break;
-                }
-            } else {playerSelection = 4}
+    console.log(
+        `\nTo play, Enter your selection, then press Enter: 
+        Press 1 for Rock,
+        Press 2 for Paper,
+        Press 3 for Scissor 
+        any other selection will be deemed a wrong entry`
+        );
+
+        let playerSelection = prompt(); 
+
+        playerSelection = Number(playerSelection);
+
+        if (playerSelection == 1 || playerSelection == 2 || playerSelection == 3) {
+            switch (true) {
+                case playerSelection == 1:
+                    playerSelection = "Rock"
+                    break;
+                case playerSelection == 2:
+                    playerSelection = "Paper"
+                    break;
+                case playerSelection == 3:
+                    playerSelection = "Scissors"
+                    break;
+                default:
+                    break;
+            }
+        } else {playerSelection = 4}
 
         let result = playIt(computerSelection, playerSelection); 
-        return result;    
-    }
+        console.log(result);    
+}
 
 
 try {
     let counter = 0;
     while (counter < 5) { 
-       console.log(startPlay(computerPlay()));
+       startPlay(computerPlay());
        counter += 1;  
     }
 } catch (error) {
