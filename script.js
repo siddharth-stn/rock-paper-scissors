@@ -16,5 +16,6 @@ function computerPlay () {
         default:
             comp_choice = "default";
     }
+    return comp_choice;
 }
 
