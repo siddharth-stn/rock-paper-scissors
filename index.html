@@ -20,14 +20,50 @@
             // Write a function playRound that takes in parameters playerSelection and computerSelection and returns a string
             // that declares the winner of the round either computer or player, like "You Lose! Paper beats Rock". playerSelection should be case insensitive.
             function playRound(playerSelection, computerSelection) {
-                // when computerSelection is ROCK ----->
-                
+                // if computerSelection is ROCK ----->
+                // if playerSelection is PAPER then return "You Win! Paper beats Rock."
+                // if playerSelection is ROCK then return "It's a tie. Rock befriends Rock." 
+                // if playerSelection is SCISSORS then return "You Lose! Rock beats Scissors."
+                if (computerSelection == "ROCK") {
+                    if (playerSelection == "PAPER") {
+                        return "You Win! Paper beats Rock."
+                    } else if (playerSelection == "ROCK") {
+                        return "It's a tie. Rock befriends Rock."
+                    } else if (playerSelection == "SCISSORS") {
+                        return "You Lose! Rock beats Scissors."
+                    }
+                // if computerSelection is PAPER ----->
+                // if playerSelection is SCISSORS then return "You Win! Scissors beat Paper."
+                // if playerSelection is PAPER then return "It's a tie. Paper befriends Paper." 
+                // if playerSelection is ROCK then return "You Lose! Paper beats Rock."   
+                } else if (computerSelection == "PAPER") {
+                        if (playerSelection == "SCISSORS") {
+                        return "You Win! Scissors beats Paper."
+                    } else if (playerSelection == "PAPER") {
+                        return "It's a tie. Paper befriends Paper."
+                    } else if (playerSelection == "ROCK") {
+                        return "You Lose! Paper beats Rock."
+                    }
+                // if computerSelection is SCISSORS ----->
+                // if playerSelection is ROCK then return "You Win! Rock beats Scissors."
+                // if playerSelection is SCISSORS then return "It's a tie. Scissors befriend Scissors." 
+                // if playerSelection is PAPER then return "You Lose! Scissors beat Paper."
+                } else if (computerSelection == "SCISSORS") {
+                        if (playerSelection == "ROCK") {
+                        return "You Win! Rock beats Scissors."
+                        } else if (playerSelection == "SCISSORS") {
+                        return "It's a tie. Scissors befriend Scissors."
+                        } else if (playerSelection == "PAPER") {
+                        return "You Lose! Scissors beat Paper."
+                        }
+                }
             }
 
 
 
 
-
+            console.log(playRound("ROCK", computerPlay()));
+            
             // Write a function called game and call the playRound function inside game to play 5 rounds and keep score. Also report winner or loser at the end.
         </script>
     </body>
