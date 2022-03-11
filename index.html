@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Rock-Paper-Scissors</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="./styles.css">
-        <script src="./script.js" defer></script>
-    </head>
-    <body>
-        <div class="container">
-            <div class="scoreBoard">
-                <div class="roundWinner">
-                    <h3>Round Winner</h3>
-                    <ul>
-                        <li>Round One: awaited...</li>
-                        <li>Round Two: awaited...</li>
-                        <li>Round Three: awaited...</li>
-                        <li>Round Four: awaited...</li>
-                        <li>Round Five: awaited...</li>
-                    </ul>
-                </div>
-                <div class="finalWinner">
-                    <h3>Final Result</h3>
-                    <p>Awaited...</p>
-                </div>
-            </div>
-            <div class="gameBoard">
-                <div class="bannerDiv">
-                    <h3>Instructions</h3>
-                    <p class="yourChoice">Press Start Button to start the game.</p>
-                    <p class="computerChoice">* There will be five rounds of the game. <br>
-                        * Click one of the buttons below to make your choice. <br>
-                        * The player who wins most number of rounds will be the winner,<br>
-                        &nbsp;&nbsp;after completion of five rounds.
-                    </p>
-                </div>
-                <div class="buttonsDiv">
-                    <div class="rpsBtn">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <button class="startBtn">START</button>
-                </div>
-            </div>
+  <head>
+    <title>Rock-Paper-Scissors</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="scoreBoard">
+        <div class="roundWinner">
+          <h3>Round Winner</h3>
+          <ul>
+            <li class="roundOne">Round One: awaited...</li>
+            <li class="roundTwo">Round Two: awaited...</li>
+            <li class="roundThree">Round Three: awaited...</li>
+            <li class="roundFour">Round Four: awaited...</li>
+            <li class="roundFive">Round Five: awaited...</li>
+          </ul>
         </div>
-    </body>
+        <div class="finalWinner">
+          <h3>Final Result</h3>
+          <p class="finalResultPara">Awaited...</p>
+        </div>
+      </div>
+      <div class="gameBoard">
+        <div class="bannerDiv">
+          <h3 class="bannerHeading">Instructions</h3>
+          <p class="paraOne">Press Start Button to start the game.</p>
+          <p class="paraTwo">
+            * There will be five rounds of the game. <br />
+            * Click one of the buttons below to make your choice. <br />
+            * The player who wins most number of rounds will be the winner,<br />
+            &nbsp;&nbsp;after completion of five rounds.
+          </p>
+        </div>
+        <div class="buttonsDiv">
+          <div class="rpsBtn">
+            <div id="ROCK"></div>
+            <div id="PAPER"></div>
+            <div id="SCISSORS"></div>
+          </div>
+          <button class="startBtn">START</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

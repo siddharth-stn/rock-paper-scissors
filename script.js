@@ -1,3 +1,15 @@
+const startBtn = document.querySelector(".startBtn");
+const rpsButtonDivs = Array.from(document.querySelector(".rpsBtn").children);
+const bannerHeading = document.querySelector(".bannerHeading");
+const paraOne = document.querySelector(".paraOne");
+const paraTwo = document.querySelector(".paraTwo");
+const finalResultPara = document.querySelector(".finalResultPara");
+const roundOne = document.querySelector(".roundOne");
+const roundTwo = document.querySelector(".roundTwo");
+const roundThree = document.querySelector(".roundThree");
+const roundFour = document.querySelector(".roundFour");
+const roundFive = document.querySelector(".roundFive");
+
 // Write a function computerPlay that randomly selects either of the three options of rock, paper or scissors.
 function computerPlay() {
   // store the random choice from 0, 1, or 2 in a variable named randChoice.
@@ -50,51 +62,121 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+let playAgain; //control the game flow (to reset when the game)
+
 // Write a function game and call the playRound function inside game to play 5 rounds and keep score. Also report winner or loser at the end.
 function game() {
+  if (playAgain) {
+    roundOne.textContent = "Round One: awaited...";
+    roundTwo.textContent = "Round Two: awaited...";
+    roundThree.textContent = "Round Three: awaited...";
+    roundFour.textContent = "Round Four: awaited...";
+    roundFive.textContent = "Round Five: awaited...";
+    finalResultPara.textContent = "Awaited...";
+    paraOne.textContent = "Press Play Again Button to start the game";
+  }
+
+  playAgain = false;
+  startBtn.style.display = "none";
+  paraOne.textContent = "Click any button below to make your choice";
+
+  // Add a class onHover to the rps button divs to make them payable
+  rpsButtonDivs.forEach((div) => {
+    div.classList.add("onHover");
+  });
+
+  bannerHeading.textContent = "Game Events";
+  paraTwo.textContent = "";
+  roundOne.textContent = "*Round One: awaited...";
+
   // create a variable to store no of wins by computer.
   // create another variable to store no. of wins by the player.
   let compWin = 0;
   let playerWin = 0;
-  // create a loop and call playRound() function 5 times in it.
-  // each iteration should ask for player selection.
-  // each iteration should add the number of wins to variable(created above) of the winner.
-  playerChoiceLoop: for (let i = 0; i <= 4; i++) {
-    let playerChoice = prompt(
-      "Enter your selection either ROCK, PAPER or SCISSORS for round number " +
-        (i + 1)
-    );
-    if (playerChoice == null) {
-      console.log("Good Bye!");
-      return;
-    }
-    playerChoice = playerChoice.toUpperCase();
+  let roundCount = 1;
+  let roundWinner;
 
-    if (
-      !(
-        playerChoice == "ROCK" ||
-        playerChoice == "PAPER" ||
-        playerChoice == "SCISSORS"
-      )
-    ) {
-      console.log("Wrong Choice! Select again.");
-      i = i - 1;
-      continue playerChoiceLoop;
-    }
+  // call the playRound() function when any of the three buttons are clicked anc check against the
+  // choice by the computer
+
+  let playerChoice = null;
+  let deductOne = false; // to deduct one from roundCount when there is a tie.
+
+  function rpsButtonClick(e) {
+    if (e.target.id === "ROCK") {
+      playerChoice = "ROCK";
+    } else if (e.target.id === "PAPER") {
+      playerChoice = "PAPER";
+    } else playerChoice = "SCISSORS";
+
     let winOrLose = playRound(playerChoice, computerPlay());
-    console.log(winOrLose);
+    paraOne.textContent = winOrLose;
     if (winOrLose.includes("Win")) {
       playerWin += 1;
+      roundWinner = "You won this Round";
     } else if (winOrLose.includes("Lose")) {
       compWin += 1;
+      roundWinner = "Computer Wins this round";
+    } else {
+      deductOne = true; //to deduct one from roundCount below in this function
+      roundWinner = "Play this round again.";
+    }
+
+    switch (roundCount) {
+      case 1:
+        roundOne.textContent = `Round One: ${roundWinner}`;
+        roundTwo.textContent = `*Round Two: awaited...`;
+        break;
+      case 2:
+        roundTwo.textContent = `Round Two: ${roundWinner}`;
+        roundThree.textContent = `*Round Three: awaited...`;
+        break;
+
+      case 3:
+        roundThree.textContent = `Round Three: ${roundWinner}`;
+        roundFour.textContent = `*Round Four: awaited...`;
+        break;
+
+      case 4:
+        roundFour.textContent = `Round Four: ${roundWinner}`;
+        roundFive.textContent = `*Round Five: awaited...`;
+        break;
+
+      case 5:
+        roundFive.textContent = `Round Five: ${roundWinner}`;
+        break;
+    }
+    if (deductOne) {
+      deductOne = false;
+    } else {
+      roundCount += 1;
+    }
+
+    if (roundCount > 5) {
+      rpsButtonDivs.forEach((div) =>
+        div.removeEventListener("click", rpsButtonClick)
+      );
+      rpsButtonDivs.forEach((div) => {
+        div.classList.remove("onHover");
+      });
+      if (playerWin > compWin) {
+        finalResultPara.textContent = "Hurray! You won the battle.";
+      } else {
+        finalResultPara.textContent = "Sorry, you lost this game.";
+      }
+
+      playAgain = true;
+      if (playAgain) {
+        startBtn.style.display = "block";
+        startBtn.textContent = "Play Again";
+        startBtn.addEventListener("click", game);
+      }
+
+      return;
     }
   }
-  // after the game ends the winner name is printed with the result.
-  console.log(`Player Wins: ${playerWin}, Computer Wins: ${compWin}`);
-  playerWin > compWin
-    ? console.log("Hooray! Player wins the Game.")
-    : playerWin < compWin
-    ? console.log("Player Lost and Computer Won.")
-    : console.log("It's a tie.");
+
+  rpsButtonDivs.forEach((div) => div.addEventListener("click", rpsButtonClick)); // call rpsButtonClick to listen to click on the three buttons
 }
-//game();
+
+startBtn.addEventListener("click", game, { once: true });
